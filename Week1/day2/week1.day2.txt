@@ -1,0 +1,134 @@
+
+Java programs are a collection of
+whitespace, 
+identifiers, 
+literals, 
+comments,  
+separators, 
+and keywords.
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+🌟 Java Data Types Made Easy! 🌟
+
+In Java, primitive types like int have a fixed size and behavior. Unlike C/C++, where integer sizes can change depending on the system, Java keeps things consistent.
+For example, an int is always 32 bits, no matter where you run it.
+
+This strict rule ensures portability—your code works flawlessly on any device! 🚀 Sure, there might be a tiny performance trade-off, but the ability to run your program anywhere makes it totally worth it. 💻✨
+
+Java = Write once, run everywhere! 🌍
+
+
+-------------------------------------------------------------------
+
+📱 Java Primitive Types Explained!  
+
+Java’s primitive types (like int, char, boolean, etc.) are simple, single-value data types—not objects. Even though Java is fully object-oriented, these primitives are exceptions for the sake of efficiency.
+
+Why? Because treating them as objects would slow things down! 🐢 By keeping them simple, Java ensures top-notch performance while still being a powerful object-oriented language. 💨
+
+Think of primitives as the "speed boosters" of Java! 🚀
+
+--------------------------------------------------------------------
+https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
+https://www.ssec.wisc.edu/~tomw/java/unicode.html
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+📘 Java Integer Literals Made Easy!
+
+🔢 Decimal (Base 10):
+Normal numbers like 1, 42, 999.
+⚠ No leading zeros! 09 → ❌ (invalid octal).
+
+🎱 Octal (Base 8):
+Start with 0 (zero). Digits: 0-7.
+Example: 0123 → 83 in decimal.
+
+🔵 Hexadecimal (Base 16):
+Start with 0x or 0X. Digits: 0-9, A-F (case-insensitive).
+Example: 0x1A → 26 in decimal.
+
+💻 Binary (Base 2):
+Start with 0b or 0B.
+Example: 0b1010 → 10 in decimal.
+
+🌈 Underscores for Readability (JDK7+):
+Add _ in numbers to group digits!
+✅ 123_456_789 → 123,456,789.
+🚫 No _ at start/end: 123 or 123 → ❌.
+
+📏 Types & Suffixes:
+
+Default: int (32-bit).
+
+Long? Add L/l at end: 123456789L.
+
+byte/short allowed if value fits!
+---------------------------------------------------------------------
+Arithmetic Operators :
+
+ Arithmetic operators are used in mathematical expressions in the same way that they are used in algebra. The following table lists the arithmetic operators:
+ Operator Result
+ + Addition (also unary plus)
+ – Subtraction (also unary minus)
+ * Multiplication
+ / Division 
+ % Modulus- REMAINDER
+ ++ Increment
+ += Addition assignment
+ –= Subtraction assignment
+ *= Multiplication assignment
+ /= Division assignment
+ %= Modulus assignment
+ –– Decrement
+
+
+
+Relational Operators :
+
+ The relational operators determine the relationship that one operand has to the other. 
+Specifically, they determine equality and ordering. The relational operators are shown here:
+ Operator		Result
+ ==			Equal to
+ !=			Not equal to
+ >			Greater than
+ <			Less than
+ >=			Greater than or equal to
+ <=			Less than or equal to
+  
+ The outcome of these operations is a boolean value. The relational operators are most frequently used in the expressions that control the if statement and the various loop statements.
+
+Here, condition is a Boolean expression. If condition is true, then the statement is executed. 
+If condition is false, then the statement is bypassed
+
+
+The Bitwise Operators :
+
+ Java defines several bitwise operators that can be applied to the integer types: long, int, short, 
+char, and byte. These operators act upon the individual bits of their operands. They are 
+summarized in the following table:
+ Operator   	    Result
+ !	     	Bitwise unary NOT
+ &		    Bitwise AND
+ |		    Bitwise OR
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
