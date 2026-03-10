@@ -1,0 +1,76 @@
+************************************************************
+🔷 Properties of Arrays in Java
+
+No           Property	                      Description
+1 | Fixed Size            | Once created, array size cannot be changed.
+2 | Homogeneous Elements  | Stores only same data type (int, String, etc.).
+3 | Index-Based Access    | Access elements using index (starts from 0).
+4 | Contiguous Memory     | Elements are stored in continuous memory blocks.
+5 | Multi-Dimensional     | Supports 1D, 2D, and multi-dimensional arrays.
+6 | Default Values        | Auto-filled with defaults (0, false, null).
+7 | Object Type           | Arrays are objects and inherit from Object class.
+8 | Heap Storage          | Arrays are stored in heap memory.
+9 | Length Property       | Use `.length` to get the size of the array.
+
+==================================================================================================
+
+❌ Cons of Arrays in Java
+
+No           Property	                      Description
+1 | Fixed Size            | You must define the size at creation and it can't grow/shrink dynamically.
+2 | No Built-in Methods   | Arrays don't have built-in methods like add(), remove(), contains() (unlike ArrayList).
+3 | Insertion is Costly   | Inserting elements in the middle requires shifting elements manually.
+4 | Deletion is Manual    | Deleting elements also needs shifting, which can be inefficient.
+5 | Type-Specific         | Arrays can only store one data type—no mix (unless using Object[]).
+6 | Memory Wastage        | If size is overestimated, unused space leads to memory wastage.
+7 | No Resizing           | You need to create a new array and copy data to resize it.
+
+
+Arrays are fixed size, so inserting or deleting means creating a new array and manually shifting elements.
+This is why ArrayList is preferred in most real-time automation use cases where dynamic changes are needed.
+
+Use Case :
+
+✅ 1. Storing Multiple Test Data
+✅ 2. Validating UI Elements
+✅ 3. Handling Web Tables or Lists
+✅ 4. Collecting Error Messages
+✅ 5. Bulk Assertion/Comparison
+
+but arrays are super useful when:
+
+A)You know the size ahead of time.
+B)You want better performance.
+C)You are dealing with fixed input/output sets.
+************************************************************
+
+String :
+
+-------------------------------------------------------------------------------------------------
+Aspect 		    | String nameOne = "Testleaf"; 	      | String nameTwo = new String("Testleaf"); | 
+--------------- | ------------------------------------|-------------------------------------------
+Memory area 	| String Constant Pool (SCP)	      | Heap memory (with optional pool intern)  |
+Reference 	    | Points to a shared, pooled object   | Creates a new object in the heap  	 |
+Duplication     | Reuses if the same value already exists| Always creates a new object unless interned|
+Efficient? 	    | ✅ Yes – less memory usage 	      | ❌ No – more memory used unnecessarily	 | 
+--------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------------------
+Aspect                       | String Constant Pool (SCP)                 	| Heap Memory                      	       	|
+---                          | ---                                       	| ---                              
+Storage                      | Dedicated area for unique string literals. 	| General storage for all objects.  		|
+Duplication                  | No duplicates allowed (reuses existing strings). | Duplicates allowed (new objects created).  	|
+Memory Efficiency            | ✅ Highly efficient (shared references).  	| ❌ Less efficient (multiple copies possible).	|	  
+Access                       | Implicit for literals or via `intern()`.   	| Explicit via `new` keyword.			|
+Mutability                   | Immutable (safe for reuse).               	| Immutable (but stored as separate objects).	| 
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+Memory Area   |  Purpose                         | Key Details                          		| Managed By	     |
+--------------|----------------------------------|------------------------------------------------------|--------------------
+Heap          | Stores all objects               | - Young/Old generations, GC cleans unused objects	| Garbage Collector  |
+Stack         | Stores method data per thread    | - Fixed size, Local variables   			| Thread lifecycle   |
+Method Area   | Stores class info & static vars  | - Was PermGen, Now Metaspace    			| JVM/GC (rarely)    |
+PC Register   | Tracks thread execution point    | - 1 per thread                      			| JVM		     |
+------------------------------------------------------------------------------------------------------------------------------
