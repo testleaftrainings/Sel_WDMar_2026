@@ -1,0 +1,273 @@
+---------------------------------------------
+🔹 What is Maven?
+
+Maven is a build automation tool used primarily for Java projects. It helps manage:
+
+A)Project structure
+
+B)Dependencies (libraries & plugins)
+
+C)Build process (compile, test, package, etc.)
+
+https://repo1.maven.org/maven2
+https://mvnrepository.com/
+--------------------------------------------
+Build Tool:
+===========
+-The build tool is used to set up everything which is required to run your java code independently.
+-It generates source code, compiling code, packaging code to a jar etc.
+
+General Phrases used in Maven:
+
+groupId: Generally groupId refers to domain id. For best practices company name is used as groupId. It identifies the project uniquely.
+artifactId: It is basically the name of the Jar without version.
+version: This tag is used to create a version of the project.
+Local repository: Maven downloads all the required dependencies and stores in the local repository called m2.
+
+Build Life Cycle:
+=================
+
+Basic maven phases are used as below.
+
+clean: deletes all artifacts and targets which are created already.
+
+compile: used to compile the source code of the project.
+
+test: test the compiled code and these tests do not require to be packaged or deployed.
+
+package: package is used to convert your project into a jar or war etc.
+
+install: install the package into the local repository for use of another project.
+
+*****************************************
+
+1)Selenium: History
+
+
+
+Key Milestones in Selenium's History
+
+| Year	   | Milestone                                        | Key Contributors            |
+|----------|--------------------------------------------------|-----------------------------|
+| 2004     | Selenium Core developed                          | Jason Huggins               |
+| 2005     | Selenium RC introduced                           | Paul Hammant                |
+| 2006     | WebDriver created                                | Simon Stewart               |
+| 2011     | Selenium 2 released (WebDriver + RC)             | Selenium Community          |
+| 2016     | Selenium 3 released                              | Selenium Community          |
+| 2021     | Selenium 4 with W3C compliance and new features  | Selenium Project Contributors|
+
+
+2)Selenium’s Ecosystem
+
+
+- Selenium WebDriver:
+  - Primary tool for browser automation.
+  - Allows script execution in multiple languages.
+
+- Selenium Grid:
+  - Enables parallel execution of tests across different browsers, OS, and devices.
+
+
+
+- Selenium IDE:
+  - Record-and-playback tool for beginners in automation.
+  - Best for prototyping test cases.
+
+
+Diagram:
++-------------+                        +-----------------+                       +----------------+
+| Your Code   |  ---> Request -->        | Browser Driver | ---> Request -->		  | Browser        |
+| (WebDriver) |                          | (e.g., Chrome) |                      	| (e.g., Chrome) |
++-------------+                        +-----------------+                       +----------------+
+      |                                         ^
+      | Port (e.g., 12345)                     	|  Port (e.g., 9222)
+      |                                         |
++-------------+                        +-----------------+            		      +----------------+
+| OS          |                	       | DevTools/HTTP   |           		    	| Native APIs    |
+| (Allocates) |             	         | Protocol        |             	 		  |                |
++-------------+               	       +-----------------+            	         +----------------+
+
+
+
+	1.Port Assignment:
+		--The operating system assigns a free port (e.g., 12345) to the browser driver for communication with WebDriver.
+		--The browser itself may use another port (e.g., 9222) for internal DevTools Protocol communication.
+	2.Session Handling:
+		--WebDriver communicates with the browser driver using the selected port for the entire session.
+	3.Custom Ports (Optional):
+		--You can specify the port explicitly when starting the browser driver. For example: 
+					chromedriver --port=9515
+
+
+### JSON WIRE PROTOCOL 
+
+JSON Wire Protocol (`/wd/hub/session`):
+Explicit Path Structure:
+- More verbose, hierarchical routing
+- Contains additional context in the path
+- Often includes version or service information
+
+Pros:
+1. Legacy support for older browsers and tools
+2. More explicit path structure (/wd/hub/) helps in debugging
+3. Compatible with older testing frameworks and infrastructure
+4. Allows for backward compatibility in hybrid environments
+
+Cons:
+1. More verbose URL structure increases latency
+2. Inconsistent implementation across different browsers
+3. Limited standardization leads to browser-specific workarounds
+4. Additional routing overhead due to longer path
+
+
+
+
+
+
+### W3C PROTOCOL
+
+W3C Protocol (`/session`):
+Endpoint Structure:
+- Minimalistic, direct routing approach
+- Uses shorter, resource-focused paths
+- More RESTful in nature
+
+Pros:
+1. Simpler, cleaner endpoint structure
+2. Lower latency due to shorter path
+3. Standardized across all modern browsers
+4. Better error handling and status codes
+5. Clearer capability negotiation
+6. More efficient resource utilization
+7. Better security through standardized validation
+
+Cons:
+1. Not compatible with very old browser versions
+2. Requires updates to existing test infrastructure
+3. May need different configurations for hybrid environments
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
+Steps to inspect the web element:-
+
+1) right click --> click inspect; you can the DOM
+2) fn+ F12 or F12 --> it will open the DOM
+3) Shorcut--> ctrl+shf+i --> it will open the DOM
+4) Shorcut--> ctrl+shf+c --> it will open the DOM along scope/spy tool
+
+
+
+
+-------------------------------------------------------------------------
+
+
+
+Tags----------->
+In the Document Object Model (DOM) of a webpage, tags (also known as HTML elements) are the building blocks that define the structure and content of the webpage. Each tag has a specific purpose and contributes to how the content is displayed, how the webpage behaves, and how it is interpreted by web browsers and search engines. Below are some common HTML tags and their purposes:
+
+1. <html>
+Purpose: The root element that encapsulates the entire content of the HTML document.
+Use: Defines the beginning and end of an HTML document.
+
+2. <head>
+Purpose: Contains meta-information about the document, such as the title, character set, links to CSS, and other metadata.
+Use: Provides information that is not displayed directly on the webpage.
+ 
+3. <title>
+Purpose: Sets the title of the webpage, which appears on the browser tab.
+Use: Important for SEO and user experience.
+
+4. <meta>
+Purpose: Provides metadata such as character encoding (charset), author of the document, and viewport settings for responsive design.
+Use: Helps search engines, browsers, and social media platforms understand the content and configuration of the page.
+
+5. <link>
+Purpose: Links to external resources, such as stylesheets (CSS files).
+Use: Commonly used to include CSS files that style the webpage.
+
+6. <script>
+Purpose: Embeds or references JavaScript code that adds interactivity and dynamic behavior to the webpage.
+Use: Can be placed in the <head> or at the end of the <body>.
+
+7. <body>
+Purpose: Contains the content of the webpage that is visible to users, including text, images, links, and other media.
+Use: All visible content and most interactive elements are placed within this tag.
+
+8. <header>
+Purpose: Represents introductory content, typically containing navigational links or introductory information.
+Use: Often used at the top of the page or section, containing the site's logo, navigation, or title.
+
+9. <nav>
+Purpose: Contains the navigation links for the website.
+Use: Typically used to house the main navigation menu.
+
+10. <main>
+Purpose: Represents the main content of the webpage, unique to the page’s purpose.
+Use: Used to improve accessibility and structure by isolating the primary content.
+
+11. <section>
+Purpose: Defines a section in a document, used for grouping related content.
+Use: Useful for dividing content into logical sections, each with a specific topic.
+
+12. <article>
+Purpose: Represents a self-contained piece of content, such as a blog post, news article, or forum post.
+Use: Enhances the semantic structure, particularly useful for content syndication and SEO.
+
+13. <aside>
+Purpose: Contains content that is tangentially related to the main content, such as sidebars, callouts, or advertisements.
+Use: Used to present additional information without interrupting the main content flow.
+
+14. <footer>
+Purpose: Represents the footer of a document or section, typically containing copyright information, links, and other summary content.
+Use: Used at the bottom of pages or sections.
+
+15. <h1> to <h6>
+Purpose: Define headings, with <h1> being the most important and <h6> the least important.
+Use: Structure content hierarchically, helping both users and search engines understand the content.
+
+16. <p>
+Purpose: Represents a paragraph of text.
+Use: Used to separate blocks of text into readable sections.
+
+17. <a>
+Purpose: Defines a hyperlink, which links to another page or resource.
+Use: Allows users to navigate to other webpages, documents, or sections within the same page.
+
+18. <img>
+Purpose: Embeds an image into the webpage.
+Use: Used to display images, requiring the src attribute to specify the image source.
+
+19. <ul>, <ol>, and <li>
+Purpose: <ul> creates an unordered list, <ol> creates an ordered list, and <li> represents a list item.
+Use: Used to present lists of items, such as bullet points (<ul>) or numbered lists (<ol>).
+
+20. <div>
+Purpose: A generic container for grouping and styling content.
+Use: Often used with CSS to apply styles or JavaScript for manipulation.
+
+21. <span>
+Purpose: A generic inline container for styling or scripting.
+Use: Used to apply styles or behaviors to specific parts of text without affecting layout.
+
+22. <form>
+Purpose: Creates a form for user input.
+Use: Used to collect and submit data, such as through input fields, checkboxes, and buttons.
+
+23. <input>, <textarea>, <button>
+Purpose: Various form elements for user input (<input> for text fields, <textarea> for multi-line text, <button> for clickable buttons).
+Use: Collect user data and interact with the webpage.
+
+24. <table>, <tr>, <td>, <th>
+Purpose: Create and structure tables (<table> for the table itself, <tr> for table rows, <td> for table data cells, and <th> for header cells).
+Use: Display data in a structured tabular format.
+
+25. <em>, <strong>
+Purpose: <em> emphasizes text (typically italicized), and <strong> highlights important text (typically bold).
+Use: Used to indicate the importance of specific words or phrases, with semantic meaning.
