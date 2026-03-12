@@ -1,0 +1,99 @@
+http://leaftaps.com/opentaps/control/main
+
+----------------------------------------
+Steps to inspect the web element:-
+
+1) right click --> click inspect; you can view the DOM
+2) fn+ F12 or F12 --> it will open the DOM
+3) Shorcut--> shf+ctrl+i --> it will open the DOM
+4) Shorcut--> shf+ctrl+c --> it will open the DOM along scope/spy tool
+
+----------------------------------------
+----------------------------------------
+Locator statergy:
+
+1)id locator:
+
+The id locator is the most preferred because of its uniqueness, performance, and simplicity.
+It uses the browser's native methods (e.g., document.getElementById()), which are highly efficient.
+Modern browsers are designed to optimize the performance of common operations like By.Id(). 
+By.Id() directly fetches the element(No Need for Traversal) because of constant-time lookups.
+
+2)name locator:
+The name attribute is commonly used in form elements (e.g., <input>, <select>, <textarea>) to identify form fields when the form is submitted.
+It is also used to group related elements, such as radio buttons or checkboxes, where multiple elements share the same name to indicate they belong to the same group.
+Why Duplicates?:
+
+The name attribute is designed to group related elements, so duplicates are intentional and necessary for functionality.
+
+3)class locator:
+The class attribute is used to apply CSS styles or JavaScript behaviors to multiple elements.
+It allows developers to group elements that share similar styling or functionality.
+Why Duplicates?:
+
+The class attribute is meant to be reusable across multiple elements, so duplicates are expected and useful for consistent styling or behavior
+
+Separation of Concerns:
+
+The id attribute is reserved for unique identification, while name and class serve different purposes (grouping and styling).
+
+4)linkText Locator
+What it Does:
+The linkText locator is used to find a hyperlink element by matching its exact visible text.
+
+It is case-sensitive and requires the complete text of the link.
+
+How it Works:
+Selenium searches for an <a> tag whose inner text exactly matches the provided linkText.
+
+
+5)partialLinkText Locator
+What it Does:
+The partialLinkText locator is used to find a hyperlink element by matching a portion of its visible text.
+
+It is also case-sensitive but only requires a substring of the link text.
+
+How it Works:
+Selenium searches for an <a> tag whose inner text contains the provided partialLinkText.
+----------------------------------------
+Selenium Exceptions:
+
+
+1)the By.className() locator only accepts a single class name. If you pass multiple class names (even if separated by spaces), it will throw an Selenium Exceptions
+2)Avoiding numbers in IDs makes automation tests stable, maintainable, and reliable!
+Many web applications generate IDs dynamically with numbers (e.g., button_123, input_456).
+These IDs change on each page load, making tests unstable because selectors break when the number changes.
+----------------------------------------
+NoSuchElement : selenium exception
+
+
+To locate a webElement in the DOM
+
+1)inspect the Dom find the attribute
+2)using webdriver findElement(), By.locator--> By.id("CaseSensitive")
+ we should not type it manually , copy and paste it from the DOM
+3)The attribule value should not be the duplicate value
+
+id="button_123"--> build 1
+button_6537--> build 2
+
+
+---------------------------------------
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+ 
+What is XPath?
+
+
+XPath stands for XML Path Language. XPath is mainly used in XSLT(Extensible Stylesheet Language Transformations), A language used to transform XML documents into other formats (XML, HTML, text, etc.). because it enables precise and flexible navigation, querying, and filtering of XML data, which are fundamental operations for transforming XML documents effectively(Processes XML data and converts it into a different format or HTML format to display in a web browser.). but it is also popularly used for navigating through the DOM(Document Object Mode) of any XML-like language document using XPathExpression. 
+
+Types of XPath
+An XPath expression can be written in two ways 
+
+A)Absolute
+B)Relative
