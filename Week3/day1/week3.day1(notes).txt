@@ -1,0 +1,269 @@
+----------------------------------------
+Selenium Exceptions:
+
+
+1)the By.className() locator only accepts a single class name. If you pass multiple class names (even if separated by spaces), it will throw an Selenium Exceptions
+2)Avoiding numbers in IDs makes automation tests stable, maintainable, and reliable!
+Many web applications generate IDs dynamically with numbers (e.g., button_123, input_456).
+These IDs change on each page load, making tests unstable because selectors break when the number changes.
+----------------------------------------
+NoSuchElement : selenium exception
+
+
+To locate a webElement in the DOM
+
+1)inspect the Dom find the attribute
+2)using webdriver findElement(), By.locator--> By.id("CaseSensitive")
+ we should not type it manually , copy and paste it from the DOM
+3)The attribule value should not be the duplicate value
+
+id="button_123"--> build 1
+button_6537--> build 2
+
+--------------------------------------------------------------------------------------
+ 
+What is XPath?
+
+
+XPath stands for XML Path Language. XPath is mainly used in XSLT(Extensible Stylesheet Language Transformations), A language used to transform XML documents into other formats (XML, HTML, text, etc.). because it enables precise and flexible navigation, querying, and filtering of XML data, which are fundamental operations for transforming XML documents effectively(Processes XML data and converts it into a different format or HTML format to display in a web browser.). but it is also popularly used for navigating through the DOM(Document Object Mode) of any XML-like language document using XPathExpression. 
+
+Types of XPath
+An XPath expression can be written in two ways 
+
+A)Absolute
+B)Relative
+
+
+Definition and Structure:
+
+ 
+
+Absolute XPath(Precise Data Selection): It starts from the root (html) and traverses down to the desired element, detailing every single element in the hierarchy. The path starts with a single forward slash /, indicating the root. 
+
+For example: /html/body/div[2]/div[2]/div/form/p[1]/label.
+
+
+Relative XPath: It starts from anywhere within the document and typically focuses on identifying elements based on attributes, indexes, or specific tags, not necessarily detailing the entire path from the root. It starts with a double forward slash //, indicating the search can begin anywhere. 
+
+For example: //input[@id=‘username’].
+
+1)Robustness:
+
+Absolute XPath: It is less robust because if there are any changes in the path or structure of the web page, the XPath would break, leading to failed element location.
+
+Relative XPath: It is more robust as it usually focuses on specific attributes or elements, making it less susceptible to changes in the overall structure of the webpage.
+
+2)Length and Complexity:
+
+Absolute XPath: These tend to be longer . They map the entire path from the root to the element, making them more complex.
+
+Relative XPath: They are generally shorter and more concise, targeting specific elements directly without detailing the entire path, reducing complexity.
+
+
+3)Flexibility and Use Cases:
+
+Absolute XPath: It's less commonly used in dynamic web environments where page structures can change frequently.
+
+Relative XPath: More commonly used in web automation and scraping because of its adaptability to web page changes and ability to precisely target elements.
+
+4)Performance:
+
+Absolute XPath: It can be slower in performance as it requires traversing the entire hierarchy of the DOM (Document Object Model) from the root.
+
+Relative XPath: Generally offers better performance as it allows for more direct queries and doesn't necessarily traverse from the root.
+
+--------------------------------------------------------------------------------------
+
+Relative xpath
+
+1)Node Navigation
+  			Relative XPath provides a way to traverse XML trees, which is necessary for XSLT to locate nodes for transformation.
+You can navigate:
+Parent nodes (..)
+Child nodes (/)
+Descendant nodes (//)
+Sibling nodes
+
+2)Filtering and Conditions
+ 			Relative XPath allows the use of conditions to filter nodes based on attributes, text values, or structure
+
+3)Data Manipulation
+			Relative XPath provides functions for string manipulation, numeric calculations, and boolean operations. These are often needed during transformations to prepare data for output.
+
+boolean()---->	This function accepts locator as parameter and it return true if the passed locator is found else returns false
+
+count()------>	This function accepts locator as parameter and returns the count of elements found
+
+position()--->	This function is used when we need to identify an element based on its position
+
+id()--------->	This function accepts id attribute of the element and returns the element if found
+
+
+
+--------------------------------------------------------------------------------------
+
+###Basic xpath
+
+1)Attribute based xpath
+
+Syntax: //tagname[@attribute='attributeValue'] 
+//input[@id='username']
+
+
+📌 When to Use:
+
+1)The HTML element has a unique or stable attribute.
+
+2)Ideal for login fields, dropdowns, buttons, checkboxes when attributes are unique.
+
+💡 Best choice when the attribute value is stable and unique.
+
+Example://label[@for ='username']
+	 	//label[@for='password']
+
+*******************************************************
+2)Text based xpath 
+
+Syntax: //tagname[text()='text value'] 
+
+//span[text()='Basic']
+
+📌 When to Use:
+
+1) When element text is static and visible to the user.
+
+2) Works well for buttons, headers, tabs, links where text content is unique
+
+💡 Easy to understand and highly readable, but avoid if text might change dynamically
+
+Example://h2[text()='Leaftaps Login'] 
+		//span[text()='Learn More'] 
+		//a[text()='Commerce Setup Assistant']
+********************************************************
+3)Functions based xpath
+
+Leverages functions  syntax like:
+//tagname[contains(@attributeName,'attributeValue')]
+//button[contains(@class,'mvm')]
+A) Contains() :
+contains(condition for the partial match)
+
+returns elements with partial matches, 
+
+📌 When to Use:
+
+1) Attribute values are long or dynamic, and you only need to match part of it.
+
+2) Used frequently in dynamic pages, like dashboards or search results.
+
+Example: //div[contains(@class, ‘header’)].
+
+
+B) Partial text based xpath:
+
+syntax: //tagname[contains(text(),'partial text')] 
+//button[contains(text(),'Up')]
+
+📌 When to Use:
+
+1) Text or attribute is partially predictable, like menu names or module links.
+
+2) Often used when only part of a name is constant across builds.
+
+Example: //a[contains(text(),'Lightning E')]
+
+
+
+Partial Attribute based xpath
+
+syntax: //tagname[starts-with(@attributeName,'partial attribute value')] 
+
+Example: //button[starts-with(@class,'ui-state-disabled')]
+
+*************************************************************************
+4)Collection based xpath
+
+Syntax: (any xpath)[index] Index will starts from 1 
+(//button[contains(text(),'Up')])[2]
+
+📌 When to Use:
+
+1) When multiple similar elements are present and you want a specific one.
+
+2) Common in table rows, repeated buttons, radio buttons, etc.
+
+⚠️ Indexing should be used only when no better unique identifier is available, and the structure is stable.
+
+Example: (//span[@class=' label bBody'])[3] 
+	(//span[text()='Login'])[2]
+
+--------------------------------------------------------------------------------------
+XPath Type	     |	Ideal For
+-------------------------------------------------------------------------------------
+Attribute Based	 |	Most reliable for unique inputs, buttons, checkboxes
+Text Based	 	 |	Tabs, buttons, headers, visible static elements
+contains()	 	 |	Dynamic classes/IDs, partial attribute matching
+Partial Text	 |	Menu items, labels with long/variable content
+Collection with Index|	Tables, multiple buttons with same label
+--------------------------------------------------------------------------------------
+*************************************************************************************
+✅ Real-Time Use Cases for XPath Axes:
+
+
+1️) parent:: – When child has no unique data, but parent does
+
+//p[@class='top']/parent::form
+
+🎯 Use Case:
+You know the child tag (like <label>) and want to reach its parent <div> or vice versa.
+
+2) ancestor:: – Move up the DOM tree
+
+//label[@for='username']/ancestor::form
+
+🎯 Use Case:
+You find a child node but need to click or validate a container card/div.
+
+3)following:: | preceding:: – Find elements anywhere after/before
+
+🎯 Use Case:
+You found a label but want to jump to a different kind of element later.
+
+⚖️ Comparison: preceding:: vs ancestor::
+---------------------------------------------------------------------------------------------------------------------------------------
+Aspect		      |			preceding::					     |			ancestor::
+-----------------------------------------------------------------------------------------------------------------------------------------
+🔁 Traversal Direction  Goes upward + left (document order, not necessarily direct parent)	Goes strictly upward (only through the parent hierarchy)
+📍 Type of nodes		Selects all nodes before the current node in the DOM			Selects only parent, grandparent,(i.e.the chain of parents)
+📐 Relationship		Not limited to hierarchy — can select siblings, previous elements	Hierarchy-based — only parents
+🎯 Use case		Find labels, sections, or data that comes before the element		Find a parent container, form, div wrapping the element
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+⚖️ Comparison: following:: vs grandparent//grandChildTag
+---------------------------------------------------------------------------------------------------------------------------------------------
+Aspect	               |		following::					     |		grandparent//grandChildTag
+---------------------------------------------------------------------------------------------------------------------------------------------
+🔁 Traversal Direction | Moves forward in document order, from the current node onward	     |   Moves downward in DOM hierarchy, starting from a known ancestor
+📐 Relation	       | Not limited to child or hierarchy, just "any tag that appears after"|	Strictly hierarchical: goes from known parent/ancestor to nested children
+🔍 Scope	       | All nodes that appear after current one, in entire document	     |   Scoped within a subtree under the grandparent
+🎯 Use case	       | Find next field, button, or message	                             |   Find nested elements from a common container
+================================================================================================================================================
+
+4)following-sibling:: | preceding-sibling:: – To go forward and backwards 
+
+//label[@for='username']/following-sibling::input
+
+//input[@id='username']/preceding-sibling::label
+
+🎯 Use Case:
+You see a value, but you want the label or name before it.
+
+🔑 When to use Axes in Real Projects:
+----------------------------------------------------------------------------------------------------------------
+Scenario							     |      Use XPath Axis
+----------------------------------------------------------------------------------------------------------------
+Child element is easy to locate, but parent has the clickable area   |	parent::, ancestor::
+Two elements are side by side					     |	following-sibling::, preceding-sibling::
+Deep nested structure or tables					     |	following::, preceding::
+-----------------------------------------------------------------------------------------------------------------
