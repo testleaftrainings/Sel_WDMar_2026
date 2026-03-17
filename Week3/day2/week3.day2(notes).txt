@@ -1,0 +1,51 @@
+  
+before 1980 --> 
+“what is happening”--> process-oriented model-->code acting on data.
+Code is a set of instructions written to manipulate or process data. This includes reading input, performing calculations or logic, and producing output.
+
+after 1980 --> 
+
+“who is being affected.”--->object-oriented programming -->data controlling access to code.
+
+🔹 In OOP, data and behavior are bundled together in classes and objects.
+So when we say "data controls access to code", in OOP it shows up in several ways:
+
+
+✅ 1. Access Modifiers (Encapsulation)
+In OOP, we use access modifiers (private, public, protected) to control access to data and methods from outside the class.
+✅ 2. Polymorphism / Method Overriding with Conditions
+A subclass can decide whether or not to allow certain behavior based on internal data (state).
+
+----------------------------------------------------------------
+Inheritance:
+
+class subclass-name extends superclass-name { 
+   // body of class 
+}
+
+Definition of Inheritance:
+
+Inheritance is a fundamental principle in object-oriented programming that allows a class to inherit properties and behaviors (methods) from another class.
+This uses "extends" keyword
+
+Advantages of Inheritance:
+
+Reusability: Inheritance promotes the reuse of existing code without having to rewrite it.
+Readability: It makes the code more simple by establishing clear relationships between classes.
+Hierarchy: Establishes parent-child relationships between Classes and Interfaces, making the structure easier to understand and maintain.
+
+Types of Inheritance:
+
+Single: A class inherits from one parent class.
+Multiple: A class inherits behaviors from more than one class, typically achieved through interfaces in Java.
+Multilevel: A class inherits from a child class, creating a multilevel chain.
+Hierarchical: Multiple classes inherit from a single parent class.
+Hybrid: A combination of multilevel and hierarchical inheritance.
+
+
+Java Examples:
+
+RuntimeException extends Exception
+List extends Collection
+Selenium WebDriver Examples: - 
+ChromeDriver extends ChromiumDriver - EdgeDriver extends ChromiumDriver - ChromiumDriver extends RemoteWebDriver
