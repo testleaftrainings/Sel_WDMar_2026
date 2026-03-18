@@ -1,0 +1,163 @@
+<----------------------------------------------------------->
+Overloading: 
+
+- It refers to the ability to create multiple methods of the same name with different implementations. 
+-Calls to an overloaded method will run a specific implementation of that method appropriate to the context, based on the number and type of arguments passed.
+
+Java Examples:
+
+Methods like accountCredits() can be overloaded to accept different types of arguments.
+Similarly, substring() in the String class is overloaded to accept different starting and ending points for the substring.
+println()
+
+Selenium WebDriver Examples:
+
+The frame() method in Selenium WebDriver is overloaded to allow different types of arguments like an integer (index of the frame), a String (name or ID of the frame), or a WebElement.
+
+Advantages of Overloading:
+
+Flexibility: Allows methods to handle different data types and numbers of arguments.
+Readability: It can make the code more readable since the same method name can be used for similar actions on different types of input.
+Reduces Complexity: Developers can use the same method name to perform similar actions, which simplifies code organization and maintenance.
+Overriding
+
+<----------------------------------------------------------->
+Method overriding:-
+
+Method overriding in Java occurs when a subclass has a method with the same name, return type, and parameters as a method in its superclass.
+It's a key feature of runtime polymorphism and allows a subclass to provide a specific implementation for a method that is already provided by its parent class
+
+Examples:
+
+equals() of String class is overriden from the Object class
+toString() of String class is overriden from the Object class
+quit() of ChromiumDriver is overriden from the RemoteWebDriver Class
+
+Super Keyword :
+
+super has two general forms. The first calls the superclass’ constructor. The second is 
+used to access a member of the superclass that has been hidden by a member of a subclass.
+
+*******************************************************************
+Abstraction:
+
+Definition:
+
+Abstraction is an OOPs concept that focuses on hiding complex implementation details and exposing only the necessary parts of an object. It's about representing features without including background details.
+
+Advantages of Abstraction:
+
+Simplicity: Abstraction simplifies the view of an object, so you don't need to understand the 
+internal workings to use it.
+Reusability: Abstract classes and interfaces can be reused to implement common methods in 
+multiple subclasses.
+
+Keyword: The "implements" keyword is used to implement an Interface
+
+*************************************************************************
+syntax :
+
+accessModifier interface name { 
+return-type method-name1(parameter-list); 
+return-type method-name2(parameter-list); 
+type final-varname1 = value; 
+type final-varname2 = value; 
+}       
+
+
+
+
+In Java, variables declared inside an interface behave differently compared to those in a normal class.
+
+👉 By default, every variable declared inside an interface is automatically:
+
+public , static , final
+
+Even if you don’t write those keywords, Java adds them for you behind the scenes!
+
+👉What does that mean practically?
+
+public:  All methods and variables are implicitly public.The variable can be accessed by any class that can see the interface.
+
+static: The variable belongs to the interface itself, not to instances of implementing classes.
+
+final: The variable is a constant — once assigned, it cannot be changed.
+
+👉Why is it designed this way?
+
+Interfaces are contracts — they define what must be done.
+
+Constants (public static final variables) are part of that contract: they are shared facts that implementations can rely on.
+
+Java wanted to keep interfaces pure: no state or instance-specific data inside them.
+(Remember, interfaces are not supposed to "store" things.)
+
+
+****************************************************************************
+
+Java’s interfaces were originally purely abstract contracts—just method signatures—so adding any new method to an interface would break all existing implementors. Java 8 loosened that strict rule by allowing two special kinds of concrete methods:
+
+default methods
+
+Why? To let library designers evolve interfaces over time without forcing everybody to update their code.
+
+Example: The Collection interface got a new stream() method in Java 8. By making it a default method (with a built-in implementation), all your old List, Set, etc. classes automatically “inherit” that behavior—you don’t have to go back and implement stream() everywhere.
+
+static methods
+
+Why? To group related helper or utility methods right next to the interface they serve, instead of scattering them in separate utility classes (like Collections, Objects, etc.).
+
+Example: Map.of(...) is a static factory on the Map interface itself. It reads more naturally than Collections.mapOf(...), and it’s impossible for an implementing class to accidentally override it.
+
+-------------------------------------------------------------------------------
+step 1: Right click on the package---> new ---> interface
+step 2: create the java class ()
+step 3: if the java class want to share the properties of interface means which keyword should be used ?
+implements
+
+optional (works only on JKD Version 8 or above)
+step 4: create a implemented method inside the interface
+---> static 
+---> default
+
+
+
+
+the properties of interface:-
+	//unimplemented method
+	public void kyc();
+	//unimplemented method
+	public void withDraw();
+*************************************************************************
+
+Types:
+
+Interfaces: Used for full abstraction, they cannot have any implementation.100%
+Abstract Classes: Provide partial abstraction with some implemented methods.both implemented ,unimplemented
+Concrete Classes: Regular classes with full implementation.
+
+Java Examples:
+
+Interfaces: List, Set, Map are interfaces providing a standard set of methods to be 
+implemented by concrete collections.
+
+Abstract Classes: AbstractList, AbstractCollection provide skeletal implementations that 
+can be used as starting points for creating concrete collections.
+
+Selenium WebDriver Examples:
+
+Interfaces: 
+   WebDriver, WebElement, Alert are interfaces representing abstract concepts in browser automation.
+Abstract Classes: 
+   By is an abstract class providing methods to locate elements.
+Concrete Classes: 
+   RemoteWebDriver is a concrete implementation of the WebDriver interface.
+
+KeyWords
+===========
+Class to Interface: -implements
+abstract class to Interface: - implements
+class to abstract class:  - extends
+class to class: - extends
+interface to interface: - extends 
+-------------------------------------------------------------------------------
