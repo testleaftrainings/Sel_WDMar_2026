@@ -1,0 +1,193 @@
+---------------------------------------------------------------------------
+Queue & Deque (FIFO or LIFO)
+
+A)Queue – FIFO (First-In-First-Out) order.
+Example: LinkedList, PriorityQueue (orders based on priority).
+
+B)Deque – Can be FIFO or LIFO(Last-In-First-Out).
+Example: ArrayDeque, LinkedList.
+
+-----------------------
+List Interface in Java:
+
+Here are some key characteristics and methods associated with the List interface:
+
+1. Ordered Collection:
+   - Lists maintain the order in which elements are inserted. The order of elements in a list is determined by the sequence in which they were added.
+
+2. Duplicates Allowed:
+   - List allows duplicate elements. Each element in the list has a unique index, starting from 0.
+
+3. Dynamic Size:
+   - Lists can dynamically grow or shrink in size as elements are added or removed. The size of a list is not fixed.
+
+4. Common List Implementations:
+   - ArrayList: Implements a dynamic array that can grow or shrink in size. Provides fast random access and is suitable for scenarios where elements are frequently accessed.
+   - LinkedList: Implements a doubly-linked list. Provides efficient insertion and deletion of elements at any position in the list.
+
+wrapper class : specifically designed to wrap primitive data types
+EX:
+dataType -  wrapper class
+============================
+int      -  Integer
+double   -  Double
+
+
+5. Common Methods:
+   - add: Adds an element to the list.
+👉Adding Items (add() method):
+
+Usage: To add elements to the list.
+Real-time Use Case: This is used when you need to add new data to your collection. For example, adding new members to a project team or new items to a to-do list.
+
+👉Inserting at Specific Index (add(index, element)):
+
+Usage: To add an element at a specified position in the list.
+Real-time Use Case: Useful in cases where the order is important, like adding a new task at a specific position in a task list or inserting a new chapter into a specific position in a book's table of contents.
+
+👉Adding All Elements from Another List (addAll()):
+
+Usage: To add all elements from one list into another.
+Real-time Use Case: Merging two datasets, such as combining two lists of customers from different regions into a single list for a unified analysis.
+
+   - get: Retrieves the element at a specified index.
+👉Accessing Elements (get(index)):
+
+Usage: To retrieve a specific element from the list based on its index.
+Real-time Use Case: Fetching a specific data entry, such as retrieving a specific order detail from a list of orders.
+
+   - remove: Removes an element from the list.
+👉Removing Elements (remove(index) and removeAll()):
+
+Usage: remove(index) removes an element at a specific index, while removeAll() removes all elements that are present in another collection.
+Real-time Use Case: remove(index) can be used for deleting a specific entry, like removing a discontinued product from a product list. removeAll() can be useful in filtering out data, like removing all outdated items from a current inventory list.
+
+👉Clearing the List (clear()):
+
+Usage: To remove all elements from the list, making it empty.
+Real-time Use Case: Resetting data, such as clearing a user's shopping cart after they have completed the checkout process.
+
+
+
+   - size: Returns the number of elements in the list.
+👉Finding the Size of the List (size() method):
+
+Usage: To get the number of elements in the list.
+Real-time Use Case: Checking the number of entries in a database, like the number of students enrolled in a course or the number of items in stock.
+
+   - contains: Checks if a specific element is present in the list
+
+
+
+==============================================================================================================================
+-----------------------------------------------------------------------------------------------------------------------------
+Feature	    |	 	remove(Object o)    |	removeAll(Collection<?> c)		|			clear()
+===============================================================================================================================
+Purpose     |	Remove one specific element 	Remove all matching elements from another collection	Remove all elements from the collection
+Argument    |	A single object			A collection (List/Set etc.)				No arguments
+Action	    | Removes first occurrence only	Removes all that match					Empties the whole collection
+Return Type |	boolean (true/false)		boolean (true/false)					void (nothing)
+Size after action|	May decrease by 1	Decreases by number of matching items			Becomes 0
+
+
+
+1. clear() 🧹
+What it does: Removes all elements from the collection.
+
+Parameters: None.
+
+Return type: void (doesn’t return anything).
+
+Use case: When you want to empty the entire collection.
+
+
+2. removeAll() 🗑️
+What it does: Removes only the elements that exist in another collection you provide.
+
+Parameters: A collection of elements to remove.
+
+Return type: boolean (returns true if the collection changed).
+
+Use case: When you want to remove specific elements (based on another collection).
+
+
+-------------------------------------------------------------------
+The List interface in Java is part of the Java Collections Framework. 
+It represents an ordered collection (also known as a sequence). 
+Lists can contain duplicate elements and are dynamic in size, meaning they can grow or shrink as needed.
+
+1)Why Use Lists: 
+	Lists are used when you need an ordered collection that can change in size. 
+	This is particularly useful when you don't know the number of elements in advance, or when you need to perform frequent insertions and deletions.
+
+2)ArrayList vs LinkedList: 
+	While ArrayList is the most common implementation, providing fast access and efficient storage for large numbers of elements, LinkedList can be more 	efficient for certain use cases, especially where frequent insertion and deletion occur.
+
+1. ArrayList 📚
+What it is: A dynamic array that grows as you add more items.
+
+Real-world use: Think of it like a shopping list. You can add, remove, or check items easily.
+
+Real-World Example: A Bookshelf
+
+You can add or remove books at any position.
+
+Want the 5th book? Just count and grab it!
+
+
+2. LinkedList 🔗
+What it is: A list where each item is connected to the next (like a chain).
+
+Real-world use: Imagine a line of people waiting for a bus. You can easily add or remove someone from the line.
+
+Real-World Example: Train Carriages 🚄
+
+Each carriage is linked to the next. Add/remove carriages easily, but finding the 10th carriage takes time!
+
+Methods and Use Cases:
+
+Creating Lists (new ArrayList<>()):
+Usage: To initialize a list.
+Real-time Use Case: In a real-world scenario, you might initialize a list to store data such as employee names, product details, or any collection of similar items. 
+For example, a list to store the names of participants in a workshop.
+
+
+👉Printing the List (System.out.println(list)):
+
+Usage: To display the contents of the list.
+Real-time Use Case: Displaying a list of items, such as a list of available products to a user, or printing a list of registered participants for an event.
+
+
+🔤 Lexicographic Sorting (Dictionary Order)
+Lexicographic order is how words are arranged in a dictionary — based on character-by-character comparison, starting from the leftmost character.
+
+It does not care about the numeric value, only about character values (ASCII/Unicode).
+
+ex:
+List<String> prices = Arrays.asList("900", "1200", "50", "300");
+Collections.sort(prices);
+System.out.println(prices);
+
+❌ Output (Lexicographic):
+[1200, 300, 50, 900]
+
+➡️ Lexicographically, "1" < "3" < "5" < "9" → so it sorts based on this.
+
+So "1200" comes before "300", even though numerically 1200 > 300.
+
+
+🔢 Numeric Sorting (What You Actually Want)
+
+You compare the actual numeric values, not characters.
+
+To get correct sorting:
+
+List<String> prices = Arrays.asList("900", "1200", "50", "300");
+
+prices.sort(Comparator.comparingInt(Integer::parseInt));
+System.out.println(prices);
+
+
+✅ Output (Numeric Sort):
+
+[50, 300, 900, 1200]
