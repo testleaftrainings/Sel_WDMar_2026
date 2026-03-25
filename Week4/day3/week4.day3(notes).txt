@@ -1,0 +1,34 @@
+Today's agenda
+
+10:00 to 10:20 ---> Quiz
+10:20 to 12.00 ---> Action + Webtable + Screen Capture
+12.00 to 12.30 ---> Break + Activity
+12.30 to 12:45 ---> Browser Options + Explicitly wait
+12:45 to 01:00 ---> JavascriptExecutor
+
+
+RECAP :
+1) Window Handling
+2) Alerts 
+3) frame
+
+
+
+
+---------------------------------------------------------------------------------
+TakesScreenShotAs:
+
+// step 1 : we have to choose our file type 		
+// step 2 : we have to create a folder 
+// File class-- . name of the folder / name of the snapshot . image format		
+// step 3 : we are merging the source file with the destination file using the Apache.commons.io
+	   FileUtils
+
+        
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.11.0</version>
+</dependency>
+
+----------------------------------------------------------------------------------
