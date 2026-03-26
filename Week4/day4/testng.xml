@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1" verbose="1" parallel="none">
+
+  <test name="E2E">
+    <classes>
+      <class name="com.testng.sample.CreateLead"/>
+      <class name="com.testng.sample.DeleteLead"/>
+    </classes>
+  </test>
+</suite>

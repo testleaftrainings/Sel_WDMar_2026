@@ -1,0 +1,299 @@
+RECAP :
+1) Window Handling
+2) Alerts 
+3) frame
+4) webtable and actions
+5) taking screenshot and implicitly wait
+---------------------------------------------------------------------------------------------------
+
+JavascriptExecutor
+
+
+
+In Selenium, the JavascriptExecutor interface is used to execute JavaScript code in the context of the browser. Here are the various ways to initialize and use JavascriptExecutor in Selenium Java:
+
+1)Using Explicit Casting
+The most common way to initialize JavascriptExecutor is by explicitly casting the WebDriver instance:
+
+
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+2.Direct Use Without a Separate Variable
+You can directly cast and use the JavascriptExecutor without assigning it to a variable
+
+    driver.executeScript(String script, Object... args);
+
+        The executeScript() method in Selenium Java allows you to execute custom JavaScript code directly in the browser during test automation(it will directly make the API CALL). This provides flexibility to perform operations that might not be possible using standard Selenium WebDriver APIs. Below are various use cases for executeScript():
+
+
+1. Interacting with Hidden or Disabled Elements
+
+    Sometimes, elements are not visible or disabled in the DOM but need to be interacted with for testing purposes.
+
+    .executeScript("arguments[0].click();", element);
+
+2. Scrolling the Page
+
+    Scroll the page to a specific position or an element.
+
+        
+        .executeScript("arguments[0].scrollIntoView(true);", element);
+        .executeScript("window.scrollBy(0,1000);");
+            window.scrollBy(x, y) is a JavaScript function that scrolls the document by a given number of pixels relative to the current position:
+
+            x: The number of pixels to scroll horizontally (positive values scroll to the right, negative values to the left).
+            y: The number of pixels to scroll vertically (positive values scroll down, negative values scroll up).
+            In your example:
+
+            x = 0: No horizontal scrolling.
+            y = 1000: Scrolls vertically down by 1000 pixels.
+
+
+3. Retrieving the Page Title or Other Properties
+
+    Get the page title or other JavaScript-accessible properties.
+    String title = (String) ((JavascriptExecutor) driver).executeScript("return document.title;");
+    
+    System.out.println("Page Title: " + title);
+
+4. Handling Alerts
+    Triggering or managing browser alerts.
+
+    driver.executeScript("alert('This is a test alert');");
+
+5. Force Page Refresh or Navigation
+    
+    Force reload or navigate without using WebDriver.
+    driver.executeScript("location.reload();");
+
+6. Manipulating Element Attributes
+    
+    
+    Modify attributes of a DOM element.
+    If sendKeys() is not working means we can go with it 
+
+    driver.executeScript("arguments[0].setAttribute('value', 'New Value');", element);
+
+--------------------------------------------------
+What is a Plugin? 
+
+ 
+
+A plugin is a software add-on that is installed on a program to add a specific feature to an existing computer program. When a program supports plugins, it enables customization. 
+
+
+-----------------------------------------------------
+Welcome to TestNG : 
+
+TestNG is a testing framework inspired from JUnit and NUnit but introducing some new functionalities that make it more powerful and easier to use, such as: Annotations.
+
+1) Run your tests in arbitrarily big thread pools with various policies available (all methods in their own thread, one thread per test class, etc…​).
+
+2) Test that your code is multithread safe.
+
+3) Flexible test configuration.
+
+4) Support for data-driven testing (with @DataProvider).
+
+5) Support for parameters.
+
+6) Powerful execution model (no more TestSuite).
+
+7) Supported by a variety of tools and plug-ins (Eclipse, IDEA, Maven, etc…​).
+
+8) Embeds BeanShell for further flexibility.
+
+9) Default JDK functions for runtime and logging (no dependencies).
+
+10) Dependent methods for application server testing.
+
+
+1.1. Requirements
+
+
+TestNG Upto v7.5: JDK 8.
+
+TestNG v7.6.0 and above: JDK 11 or higher.
+
+TestNG Eclipse Plugin Update Site
+Main update site URL: https://testng.org/testng-eclipse-update-site
+
+Versioned update site URL:
+
+https://testng.org/testng-eclipse-update-site/
+
+Standard version : https://testng.org/testng-eclipse-update-site/7.4.0
+
+
+
+1.2. Introduction
+
+
+TestNG is a testing framework designed to simplify a broad range of testing needs, from unit testing (testing a class in isolation of the others) to integration testing (testing entire systems made of several classes, several packages and even several external frameworks, such as application servers).
+
+Writing a test is typically a three-step process:
+
+1) Write the business logic of your test and insert TestNG annotations in your code.
+
+2) Add the information about your test (e.g. the class name, the groups you wish to run, etc…​) in a testng.xml file or in build.xml.
+
+3) Run TestNG.
+
+Steps to start with TestNG: 
+
+Convert normal script into a TestNG script: 
+
+*Remove static keyword from the main method 
+
+*Remove the input arguments(String[] args) 
+
+*Give a meaningful name to the method 
+
+*Add @Test on the top of the method 
+
+**Import from org.testng.annotations. 
+
+*Right click on the testcase Run as-> 1 TestNG Test 
+
+
+1.3. Documentation
+
+
+The concepts used in this documentation are as follows:
+
+#<suite>: A suite is represented by one XML file. It can contain one or more tests and is defined by the <suite> tag.
+
+#<test>: A test is represented by <test> and can contain one or more TestNG classes.
+
+#<class>: A TestNG class is a Java class that contains at least one TestNG annotation. It is represented by the <class> tag and can contain one or more test methods.
+
+# A test method is a Java method annotated by @Test in your source
+
+##################Parallel Testing################################
+
+
+
+| `<suite parallel>` | `<test parallel>` | Thread-Control | Execution Flow Type                                             |
+| ------------------ | ----------------- | -------------- | --------------------------------------------------------------- |
+| `classes`          | (ignored)         | Suite-level    | All classes globally                                            |
+| `tests`            | (ignored)         | Suite-level    | Tests run in parallel                                           |
+| `none`             | `classes`         | Per test       | Each test runs sequentially, but classes inside run in parallel |
+| 'tests'            |  'classes'        | at suite -> Tests |   2*2 = 4                                 |
+                                          at test--> classess
+
+------------
+✅ 1. <suite parallel="classes" thread-count="2">
+
+<suite parallel="classes" thread-count="2">
+    <test name="Group1">
+        <classes>TestClass1 to TestClass5</classes>
+    </test>
+    <test name="Group2">
+        <classes>TestClass6 to TestClass10</classes>
+    </test>
+</suite>
+
+👉 TestNG runs all classes in all <test>s, 2 at a time
+
+T1: TestClass1 → TestClass3 → TestClass5 → TestClass7 → TestClass9
+T2: TestClass2 → TestClass4 → TestClass6 → TestClass8 → TestClass10
+
+
+✅ 2. <suite parallel="tests" thread-count="2">
+Each <test> runs in parallel (not classes inside).
+
+<suite parallel="tests" thread-count="2">
+    <test name="Group1">
+        <classes>TestClass1 to TestClass5</classes>
+    </test>
+    <test name="Group2">
+        <classes>TestClass6 to TestClass10</classes>
+    </test>
+</suite>
+
+🚀 Execution (both tests start in parallel):
+T1: Group1: TestClass1 → TestClass2 → TestClass3 → TestClass4 → TestClass5
+T2: Group2: TestClass6 → TestClass7 → TestClass8 → TestClass9 → TestClass10
+
+
+✅ 3. <suite parallel="none">, but <test parallel="classes" thread-count="2">
+
+<suite parallel="none">
+    <test name="Group1" parallel="classes" thread-count="2">
+        <classes>TestClass1 to TestClass5</classes>
+    </test>
+    <test name="Group2" parallel="classes" thread-count="2">
+        <classes>TestClass6 to TestClass10</classes>
+    </test>
+</suite>
+
+📦 Sequential test groups, but classes inside each test run in parallel
+
+Group1 runs first:
+T1: TestClass1 → TestClass3 → TestClass5
+T2: TestClass2 → TestClass4
+
+Then Group2:
+T1: TestClass6 → TestClass8 → TestClass10
+T2: TestClass7 → TestClass9
+
+
+##########################################################################################################
+
+1.4. Annotations
+
+
+   Annotation                             				Description
+
+@BeforeSuite			@BeforeSuite: The annotated method will be run before all tests in this suite have run.
+
+@AfterSuite			@AfterSuite: The annotated method will be run after all tests in this suite have run.
+
+@BeforeTest			@BeforeTest: The annotated method will be run before any test method belonging to the classes inside 								the <test> tag is run.
+
+@AfterTest			@AfterTest: The annotated method will be run after all the test methods belonging to the classes 							inside the <test> tag have run.
+
+@BeforeGroups			@BeforeGroups: The list of groups that this configuration method will run before. This method is 							guaranteed to run shortly before the first test method that belongs to any of these groups is invoked.
+
+@AfterGroups			@AfterGroups: The list of groups that this configuration method will run after. This method is 								guaranteed to run shortly after the last test method that belongs to any of these groups is invoked.
+
+@BeforeClass			@BeforeClass: The annotated method will be run before the first test method in the current class is 							invoked.
+
+@AfterClass			@AfterClass: The annotated method will be run after all the test methods in the current class have 							been run.
+
+@BeforeMethod			@BeforeMethod: The annotated method will be run before each test method.
+
+@AfterMethod			@AfterMethod: The annotated method will be run after each test method.
+
+@Listeners			Defines listeners on a test class.
+
+@DataProvider			Marks a method as supplying data for a test method. The annotated method must return an Object[][] 							where each Object[] can be assigned the parameter list of the test method. The @Test method that wants 							to receive data from this DataProvider needs to use a dataProvider name equals to the name of this  annotation.
+
+@Parameters			Describes how to pass parameters to a @Test method.
+
+@Test				Marks a class or a method as part of the test.
+
+
+
+
+# DataProvider  must return either Object[][] or Object[] or Iterator<Object[]> or Iterator<Object>
+
+# ITestListener.super.onTestStart(result);
+
+Since ITestListener is an interface with default methods (from Java 8+), this line calls the default implementation of onTestStart() from ITestListener (if any).
+However, the default implementation in ITestListener is empty, so this does nothing unless TestNG provides an update with some logic.
+
+https://text-compare.com/
+
+
+Annotation:
+@BS
+@BT
+@BC
+@Dataprovider
+@BM
+@Test
+@AM
+@AC
+@AT
+@AS
