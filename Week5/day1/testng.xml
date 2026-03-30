@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1" verbose="1" thread-count="2"  parallel="tests">
+<test name="CreateLead" parallel="classes">
+    <classes>
+      <class name="com.testng.sample.CreateLead"/>
+    </classes>
+  </test>
+  <test name="DeleteLead" parallel="classes">
+    <classes>
+      <class name="com.testng.sample.DeleteLead"/>
+      <class name="com.testng.sample.CreateLead"/>
+    </classes>
+  </test>
+</suite>
