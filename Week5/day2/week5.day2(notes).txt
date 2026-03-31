@@ -1,0 +1,117 @@
+Recap :
+Testng annotation --> 9 important annotations
+@BS
+  @BT
+    @BC
+     @DataProvider
+      @BM-->
+	@Test --> main()
+      @AM
+    @AC
+  @AT
+@AS 
+
+ALL the before annotation is used to configure the execution environment --> what browser type, what browser profile, application url, valid credentials
+ALL the after annotation is used to configure teardown operation --> forcefully closing all the resources which is used at the run time   
+
+testng attributes--> dependency injecting, enabling ,priority will be only applicable within @Test annotation
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+Parameterization: hardcoding of data ignored
+
+a)static Parameterization: configuration settings--> test data
+
+b)dynamic Parameterization : scenario based --> test data
+
+ Parameters are used to link Java method parameters to their actual value, defined here in xml file.
+
+
+--------------------------------------
+Steps to implement Static Parameterization:
+
+1)Identify the data that are common data across all testcases ex: url,username,password
+2)Add <parameter> tag for each one of the data in the testng.xml file
+3)Map the parameters in the java class using @Parameters Note: The name should exactly match the names in the xml @Parameters({"url","username","password"})
+4)Use that parameters inside the method using arguments Note: Sequence matters but the name of the argument doesnot matter public void preCondition(String url,String uName,String pWord).using the pipeline order created form @Parameters , The values for the local variables  PRESENT inside the preCondition() is initialized
+[pipeline order is very important here]
+5)Finally, replace it with arguments driver.get(url);
+Note: You should always run from the xml file when you use parameters
+
+
+
+Steps to achive Static Parameterization
+1)Create a xml file for execution
+2)Add parameter tag in xml and provide values for name(key) and value
+3)In Base class(ProjectSpeficiMethod) at the top of the preCondition() declare @Parameters annotation from TestNG
+4)Inside the @Parameters , declare a key in String[]
+5)In the preCondition() input args declare arguments for the key in same order as @Parameters
+6)Remove the hardcorded values and pass the method input arguments
+7)In xml do right click --> Run as --> TestNG Suite
+
+💼 Real Use Cases in Automation Projects
+✅ Use Case 1: Environment Configuration
+✅ Use Case 2: User Credentials
+✅ Use Case 3: Role-Based Testing
+For testing features with different roles like admin, user, or guest.
+
+
+
+
+Hints to Solve: 
+- Add the <parameter> tag at the test level in the XML suite. 
+ - Add @Parameters annotation in the Java class on top of the method that needs to receive parameter data. 
+ - Pass the argument to the test method to receive data from the XML suite. 
+ - Replace hardcoded values in the required test steps with the parameterized values. 
+ - Execute the test from the XML file.
+
+
+###################################################################################
+
+Dynamic Parameterization
+Steps to implement Dynamic Parameterization:
+
+1)Identify the datas that are specific to the particular testcase 
+ex: CreateLead - compnayname, firstname, lastname, phonenumber 
+	EditLead - phonenumber,companyname
+2)Create a method sendData() inside the CreateLead class
+3)Annotate that method with @DataProvider
+4)Inside sendData() create 2-Dimensional array with number of rows and columns
+	Add all the sets of data into the array and make sure the index starts from 0
+5)Return the data back to the calling method
+6)Receive this data in the test method
+	use dataprovider attibute
+	use that arguments inside the method.
+7)Finally, replace the hardcoded values
+8)In xml do right click --> Run as --> TestNG Suite
+
+
+
+
+
+Steps to achive Dynamic Parameterization
+
+1)In TestCase class declare a method as sendData() and Use annotation as @DataProvider
+2)Create obj for 2D String and pass no.of.testdatas and testdata info count (row and col size)
+3)Declare values/testdatas for data[][]
+4)return data variable
+5)In @Test invoke the dataProvider(Attribute) and assign @DataProvider methodName
+6)Add Method input argument for the testdata information (It should be a same order)
+7)Remove hardcorded data and use variables
+
+💼 Real Use Cases in Automation Projects
+
+✅ Use Case 1: Form Validation
+Test a form with multiple sets of data (positive and negative).
+
+✅ Use Case 2: Data-Driven Testing
+Pull data from Excel, CSV, JSON, or a database to test a feature with real user inputs.
+
+✅ Use Case 3: Boundary and Edge Case Testing
+Provide edge inputs like min/max lengths, nulls, and special characters.
+
