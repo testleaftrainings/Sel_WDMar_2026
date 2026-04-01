@@ -1,0 +1,65 @@
+#############################################################################################
+Read Excel:
+
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi</artifactId>
+    <version>5.2.3</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.poi</groupId>
+    <artifactId>poi-ooxml</artifactId>
+    <version>5.2.3</version>
+</dependency>
+
+#############################################################################################
+How to read data from Excel:
+
+
+
+steps to create excelsheet in data folder:
+
+1.rightclick--->project--->clicknew-->folder--->foldername-->data-->finish
+2.right click on the folder--->show in--->system explorer-->doubleclick on data-->rightclick-->new--->ms excelsheet.
+
+Excel:
+Login.xls= -> Microsoft excel spreadsheet
+Login.xlsx -> Microsoft excel spreadsheet in xml format
+
+XSSF-> XML SpreadSheet Format
+
+
+Step1-> Set path for workbook
+step2-> Get into the sheet
+Step3-> Get into Row values
+Step4-> Get into cell values
+Step5-> Read Data from workbook and print
+Step6-> close the workbook
+
+Fun Fact : 
+
+🔹 getLastRowNum() → int
+Returns: The 0-based index of the last physical row in the sheet.
+
+Why int?
+
+Excel supports up to 10,48,576 rows (in .xlsx format).
+
+Since this number is far beyond what a short (max value 32,767) can hold, the method must return int.
+
+🔹 getLastCellNum() → short
+Returns: The index of the last cell + 1 (i.e., count of the last column in the row).
+
+Why short?
+
+Excel supports a maximum of 16,384 columns (column XFD in .xlsx format).
+
+16,384 fits well within the short data type range:
+
+short in Java ranges from -32,768 to 32,767
+
+So using short saves memory and matches Excel’s constraints.
+
+
+##########################################################################################
