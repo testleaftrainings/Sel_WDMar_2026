@@ -1,0 +1,271 @@
+################################################################################################
+
+# Steps to do Excel Integration:
+
+1. Create 2- dimensional array in the ReadExcel Class with rowCount and columnCount
+String[][] testRecord = new String[rowCount][columnCount];
+
+2. Push stringCellValue to the Array
+DataProvider what index value it will be started - 0
+Excel program what index value for row - 1
+
+convert excel into DataProvider
+testRecord[i-1][j]=stringCellValue;
+
+3. Close the workbook and return the data
+excel.close();
+return testRecord;
+
+4. Change main method to a normal static method -retrain the static keyword
+public static String[][] extractDataFromExcel(){
+}
+
+5. Inside the testcase within the dataLibrary() call the extractDataFromExcel() from ReadExcel Class and return the testRecord
+@DataProvider(name="extractData")
+public String[][] dataLibrary() throws IOException {
+    
+return ReadExcel.readExcel();
+
+6.inside excel program craete one input agrs and pass variable inside workbook
+ (./data/"+fileName+".xlsx)
+ 
+7. inside the BaseClass or PSM  and declare a fileName globally
+ 
+public String fileName; ------------ > Global declaration
+@DataProvider(name="extractData")
+public String[][] dataLibrary() throws IOException {
+return ReadExcel.extractDataFromExcel(fileName); 
+}
+8. Create sendLeadData() inside each testcase and annotate with @BeforeTest and mention the filename here
+@BeforeTest
+public void sendLeadData() {
+fileName="ClassName";
+} 
+9. Finally , run from the xml file
+
+##########################################################################
+Steps to do Excel Common Integration
+1. Create 2- dimensional array in the ReadEXcel Class with rowCount and columnCount
+2. Push stringCellValue to the Array
+3. Close the workbook and return the data
+4. Change main method to a normal static method -retrain the static keyword
+5. Inside the testcase within the sendData() call the readExcel() from ReadExcel Class and return the data
+6.  inside excel program craete one input agrs and pass variable inside workbook
+7. Create setValues() inside each testcase and annotate with @BeforeTest and mention the filename here
+8. Finally , run from the xml file
+
+
+################################################################################################
+
+
+
+
+
+
+#############################################################################################
+
+# Steps to do Excel Integration:
+
+1. inside excel program craete one input agrs and pass variable inside workbook
+ 
+(./data/"+fileName+".xlsx)
+ 
+ 
+2. into the BaseClass or PSM  and declare a fileName globally
+ 
+public String fileName; ------------ > Global declaration
+
+3. Move the sendData Method to the BaseClass or PSM 
+
+@DataProvider(name="fetchData")
+public String[][] sendData() throws IOException {
+return TestDataLibrary.readExcel(fileName); 
+}
+4. Create setValues() inside each testcase and annotate with @BeforeTest and mention the filename here
+
+@BeforeTest
+public void setValues() {
+fileName="EditLead";
+} 
+5. Finally , run from the xml file
+
+
+
+Gobal variables : driver , fileName
+ @BeforeTest-initializing the fileName here
+      @DataProvider
+         @parameters
+           @BeforeMethod- required data for the testcases are collected here -PSM
+                    initializing the driver here
+                @Test
+            @AfterMethod
+
+
+##########################################################
+
+https://cucumber.github.io/cucumber-eclipse/update-site - plugin
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-testng</artifactId>
+    <version>7.15.0</version>
+</dependency>
+
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.15.0</version>
+    </dependency>
+
+###############################
+What is a BDD Framework?
+
+Behavior-Driven Development (BDD) is an agile software development methodology that enhances collaboration between developers, testers, and non-technical stakeholders (like business analysts) to ensure that everyone shares a common understanding of how an application should behave. Here are some key points:
+    
+Focus on Behavior:
+BDD emphasizes specifying the expected behavior of software using natural language. This makes requirements more accessible and understandable to all team members.
+
+Collaboration:
+It promotes close communication among team members, reducing the gap between technical implementation and business requirements.
+
+Living Documentation:
+By writing scenarios in plain language, the test cases serve as documentation that evolves with the application, ensuring that they always reflect the current state of the system.
+
+Shift-Left Testing:
+BDD encourages early testing during the development process, which helps in identifying issues sooner and ensures that the development aligns with business expectations.
+  
+####################################
+ 
+🔹 TDD – Test-Driven Development
+
+Who drives it? Developers
+What comes first? Unit tests before writing actual code.
+
+🔁 Flow:
+Developer writes a failing test → Writes minimum code to pass the test → Refactors the code → Test passes → Code is complete.
+
+⛳ Connection to Shift Left:
+
+1)Testing starts even before implementation.
+
+2)Bugs are caught early in the dev phase, reducing cost and rework.
+
+Example: Writing a failing test case → writing code to pass the test → refactoring.
+
+🔧 Tools:
+JUnit, TestNG, Mockito
+
+🔹 ATDD – Acceptance Test-Driven Development
+
+Who drives it? Collaboration of Dev, QA, and Business
+What comes first? Acceptance criteria (tests) are defined before dev begins.
+
+🔁 Flow:
+→ Product Owner defines acceptance → Dev builds → Test validates → Feature accepted
+
+⛳ Connection to Shift Left:
+
+1)Tests are aligned with business goals from the beginning.
+
+2)Encourages early collaboration.
+
+3)Ensures development is testable and meets user expectations.
+
+🔧 Tools:
+FitNesse, Robot Framework, Cucumber
+
+
+
+🔹 BDD – Behavior-Driven Development
+
+Who drives it? Product Owners, Testers, and Developers
+What comes first? User behaviors described in Gherkin format (Given-When-Then)
+
+🔁 Flow:
+→ Discuss behaviors → Write scenario in Cucumber → Dev writes code to satisfy it
+
+⛳ Connection to Shift Left:
+
+1)Encourages conversation and shared understanding before coding.
+
+2)Enhances test coverage early in development.
+
+3)Scenarios written in plain language → drives both development and testing.
+
+🔧 Tools:
+Cucumber, JBehave, SpecFlow
+
+####################################
+
+How Does Cucumber Help Implement BDD?
+
+Cucumber is a popular tool that facilitates the implementation of BDD by providing a structured yet flexible approach to writing and executing tests. Here’s how Cucumber supports BDD:
+
+Gherkin Syntax:
+
+Gherkin is a domain-specific language (DSL) designed specifically for Behavior-Driven Development (BDD). It enables writing test scenarios in a plain, structured, and human-readable format, bridging the gap between technical teams and non-technical stakeholders.
+
+Test Attributes :  TS ID [Feature] ,TC ID , TC description[Scenario] , precondition[Given] , steps (test data)[When] ,ER , AR [Then], Status , Defect ID 
+
+
+
+Feature Files:
+
+
+These files contain scenarios that describe the expected behavior of the application using keywords makes it easy to understand what is being tested and why.
+
+Keywords Summary :
+
+#Feature: List of scenarios.
+#Scenario: Business rule through list of steps with arguments.
+#Given: Some precondition step
+#When: Some key actions
+#Then: To observe outcomes or validation
+#And,But: To enumerate more Given,When,Then steps
+#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
+#Examples: Container for s table
+#Background: List of steps run before each of the scenarios
+#""" (Doc Strings)
+#| (Data Tables)
+#@ (Tags/Labels):To group Scenarios
+#<> (placeholder)
+#""
+## (Comments)
+
+Step Definitions:
+Each line in a Gherkin scenario is linked to a corresponding code block (step definition). These methods, written in a programming language like Java, perform the actual testing actions (e.g., interacting with the application, verifying outcomes).
+
+Integration with Testing Frameworks:
+Cucumber integrates seamlessly with frameworks such as JUnit, TestNG (in Java) to run tests. This integration allows teams to leverage familiar testing tools while using a BDD approach.
+
+In Summary
+
+BDD is a methodology that emphasizes collaboration and shared understanding through behavior-focused, human-readable test scenarios.
+Cucumber implements BDD by using Gherkin syntax to write feature files, mapping these to executable code with step definitions, and integrating with standard testing frameworks. It also provides hooks and detailed reporting to streamline the testing process.
+Cucumber’s History begins in 2008 within the Ruby community, growing alongside the BDD movement and expanding its support to multiple programming languages, making it a cornerstone tool in modern agile testing practices.
+
+
+###################################################################################
+
+  
+------------------------------------------------------------------------------------------------------------------------
+| Layer               | Location in Maven Project            | Reason for this Location                                   |
+----------------------------------------------------------------------------------------------------------------------
+| Feature Files       | src/test/java/features/             | - Maven treats src/test/java/ as the standard        |
+| (.feature)         |                                      |   folder for test resources.                              |
+|                    |                                      | - Feature files are not Java code but test data, so they  |
+|                    |                                      |   do not need to be compiled.                            |
+|                    |                                      | - Cucumber automatically looks for .feature files here.  |
+---------------------------------------------------------------
+| Step Definitions   | src/test/java/stepDefinitions/      | - Step definitions are Java code and must be compiled,   |
+|                    |                                      |   so they go inside src/test/java/.                      |
+|                    |                                      | - Keeping them separate from feature files maintains     |
+|                    |                                      |   separation of concerns.                                |
+|                    |                                      | - Makes it easier to debug and maintain test logic.      |
+---------------------------------------------------------------
+| Test Runner        | src/test/java/runners/              | - The test runner (TestNG, JUnit, or Cucumber.class) is  |
+|                    |                                      |   an entry point for execution.                          |
+|                    |                                      | - Needs to be inside src/test/java/ because it's Java    |
+|                    |                                      |   code and should be compiled.                          |
+|                    |                                      | - Placing it in runners/ keeps it separate from step     |
+|                    |                                      |   definitions.                                           |
+---------------------------------------------------------------
