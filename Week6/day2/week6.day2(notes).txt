@@ -1,0 +1,58 @@
+Recap:
+
+1) Parameterization : 
+    Static : ("" , '')  in feature file
+    Dynamic : #Scenario Outline: scenario description
+#	Given a precondition has value '<param_1>'
+#		And something with '<param_2>'
+#		Then check '<param_3>' is the output
+#		
+#		Examples:
+#		| param_1 | param_2 | param_3 |
+#		| value1_1 | value1_2 | value1_3 |
+#		| value2_1 | value2_2 | value2_3 |
+#		| value3_1 | value3_2 | value3_3 |
+
+
+---------------------------------------------------------------------------------------------
+Cucumber With Testng Implementation :
+
+base class --> @AbstractTestNGCucumberTests
+    @BeforeMethod @AfterMethod --> implement it in base class itself
+	hooks layer --> it is  optionals now
+		runner class --> Cucmber : How to current a feature file , without providing the endpoint like .feature?
+		    attribute : tags --> logical opertions like [and, not, or]
+
+---------------------------------------------------------------------------------------------
+
+
+constructor :
+
+The class name followed by parentheses specifies the constructor for the class. A constructor defines what occurs when an object of a class is created. Constructors are an important part of all classes and have many significant attributes. Most real-world classes explicitly define their own constructors within their class definition. However, if no explicit constructor is specified, then Java will automatically supply a default constructor. 
+
+Java allows objects to initialize themselves when they are created. This automatic initialization is performed through the use of a constructor.
+
+A constructor initializes an object immediately upon creation. It has the same name as the class in which it resides and is syntactically similar to a method. Once defined, the constructor is automatically called when the object is created, before the new operator completes. Constructors look a little strange because they have no return type, not even void. This is because the implicit return type of a class’ constructor is the class type itself.  It is the constructor’s job to initialize the internal state of an object so that the code creating an instance will have a fully initialized, usable object immediately.
+
+class-var = new classname ( );
+Now you can understand why the parentheses are needed after the class name. What is actually happening is that the constructor for the class is being called.
+
+When you do not explicitly define a constructor for a class, then Java creates a default constructor for the class. The default constructor automatically initializes all instance variables to their default values, which are zero, null, and false, for numeric types, reference types, and boolean, respectively. The default constructor is often sufficient for simple classes, but it usually won’t do for more sophisticated ones. Once you define your own constructor, the default constructor is no longer used
+
+
+
+--------------------------------------------
+The this Keyword
+
+Sometimes a method will need to refer to the object that invoked it. To allow this, Java defines the this keyword. this can be used inside any method to refer to the current object. That is, this is always a reference to the object on which the method was invoked. You can use this anywhere a reference to an object of the current class’ type is permitted.
+
+As you know, it is illegal in Java to declare two local variables with the same name inside the same or enclosing scopes. Interestingly, you can have local variables, including formal parameters to methods, which overlap with the names of the class’ instance variables. However, when a local variable has the same name as an instance variable, the local variable hides the instance variable.
+
+While it is usually easier to simply use different names, there is another way around this situation. Because this lets you refer directly to the object, you can use it to resolve any namespace collisions that might occur between instance variables and local variables.
+
+
+
+
+
+
+

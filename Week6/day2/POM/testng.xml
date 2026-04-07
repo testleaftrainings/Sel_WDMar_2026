@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="functional suite" verbose="2">
+<test name="functional testcases">
+<classes>
+<class name="com.leaftaps.testcases.TC001_LoginTest"/>
+<class name="com.leaftaps.testcases.TC002_CreateLead"/>
+</classes>
+</test>
+</suite>
