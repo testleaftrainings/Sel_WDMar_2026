@@ -1,0 +1,102 @@
+###########################################
+Recap :
+
+1) POM Introduction : what? why? how?
+Design pattern :
+                   Each webpage as a separate .java file 
+                   Each functionality inside the webpage as a separate method()
+2) create each object for the each page, we called the respective methods using that specific object  :  Builder 
+
+3) Only object is created, for the 1st page other class objects were connected using return keyword   :  Singleton 
+
+4) POM sequential Execution : return  default Constructor
+   which java keyword we used to represent current class reference --> this
+
+
+###########################################
+POM parallel Execution : return  Parameterized Constructor
+
+
+Cucumber : feature,steps,runner
+
+Cucumber with POM:
+------------------
+ - Create 4 packages
+     - base
+        Create BaseClass with common methods
+        BaseClass should extend AbstractTestNGCucumberTests
+     - features
+         Create feature files
+     - pages/steps
+        Create classes for each page and each page should extend BaseClass
+     - runner
+        Create CucumberRunner class and , mention glue="pages"
+        The runner class should extend BaseClass
+
+###########################################
+Thread :
+
+testng.xml -> threadcount=2
+java--> Thread.sleep()
+testNG attributes--> threadPoolsize
+
+
+
+The Thread class in Java is used for creating and managing threads, which enable concurrent execution of tasks. 
+
+Why is one thread executing fully before the other?
+
+1)Thread Scheduling is Non-Deterministic
+
+The JVM assigns CPU time to threads based on the OS's thread scheduler.
+
+Sometimes, the OS may allow Thread-0 to complete all its iterations before giving CPU time to Thread-1.
+
+2)CPU Time Slice Allocation
+
+Some OS schedulers may allocate longer time slices to a thread before switching to another.
+
+This could cause one thread (Thread-0) to run completely before Thread-1 starts.
+
+3)System Load and Thread Priority
+
+If the system is lightly loaded, the OS may not interrupt the running thread until it finishes.
+
+The Thread class uses default priority (5), which might allow one thread to complete before the other gets CPU time.
+
+
+Is This Behavior Guaranteed?
+      No! If you run the program multiple times, you might see different outputs where Thread-0 and Thread-1 interleave. The execution order depends on the JVM and OS.
+
+When running TestNG tests in parallel mode, multiple test methods or classes execute concurrently using separate threads. The TestNG XML configuration defines the parallel execution mode (methods, classes, tests, or suites).
+
+
+Step-by-Step Execution
+1)TestNG starts execution and creates multiple threads (as per thread-count).
+2)Each test method is assigned to a separate thread for parallel execution.
+3)Threads execute methods independently, meaning TestClassA.test1 and TestClassB.test1 can run at the same time.
+4)Once a thread completes one test method, it moves to the next available test method.
+5️)Test execution completes when all threads finish executing their assigned test methods.
+
+
+
+###########################################
+
+Pom-ThreadLocal:
+---------------
+
+What is ThreadLocal in Java?
+
+ThreadLocal<T> is a Java class that provides thread-local variables. These variables are isolated per thread, meaning each thread has its own copy, preventing conflicts when multiple threads access shared data(pages).Each thread holds an implicit reference to its copy of a thread-local
+ * variable as long as the thread is alive.
+ThreadLocal Used to create thread local variables. Each thread will have its own copy of a thread local variable.
+
+
+private - a variable which is accessible only within that class
+
+Exceptions which we face while executing the testcases in parallel mode , by declaring the driver variable as static at globally
+//org.openqa.selenium.WebDriverException : TIMEOUT
+//org.openqa.selenium.StaleElementReferenceException : Driver value is same
+
+###########################################
+
