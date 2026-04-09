@@ -1,0 +1,104 @@
+Difference configuration for different mode of execution:
+
+For TestNG _POM : 
+- with driver as static -> sequential execution is possible
+- To have sequential and parallel execution declare Parameterized Constructor in each pages
+
+For Cucumber_POM: 
+- Constructor should not be Parameterized 
+- With driver as static 
+-> sequential execution is possible
+
+###########################################
+
+Pom-ThreadLocal:
+---------------
+
+What is ThreadLocal in Java?
+
+ThreadLocal<T> is a Java class that provides thread-local variables. These variables are isolated per thread, meaning each thread has its own copy, preventing conflicts when multiple threads access shared data(pages).Each thread holds an implicit reference to its copy of a thread-local
+ * variable as long as the thread is alive.
+ThreadLocal Used to create thread local variables. Each thread will have its own 
+copy of a thread local variable.
+
+private - a variable which is accessible only within that class
+   static -one instance will be shared among all the classes
+      final-variable once initialized cannot be changed.
+
+Steps: 1. private static final ThreadLocal<RemoteWebDriver> rd = new ThreadLocal<RemoteWebDriver>();
+
+ private:
+   It can be accessed only within the class
+ static final:
+    static+final = constant
+ ThreadLocal:
+   It is a class that provides thread-local variable
+
+✅ Why private members are accessed using public methods
+In Java, the reason we make variables private and access them via public getter/setter methods is to follow the Object-Oriented Programming principle of Encapsulation.
+
+🔒 1. What is Encapsulation?
+Encapsulation is the concept of hiding internal object details and exposing only what's necessary to the outside world.
+
+🎯 Goal:
+Restrict direct access to the object's internal state.
+
+Provide controlled, safe access through public methods.
+
+🧱 2. Why Use private + static + final Combo?
+Reason			|	Explanation
+-----------------------------------------------------------------------------------------------
+✅ Data Protection	|	Prevents unwanted or accidental modification of internal data.
+✅ Controlled Access	|	You decide who can read/write and how.
+✅ Validation Logic	|	Setters can include validation before setting values.
+✅ Future Flexibility	|	You can change internal implementation without affecting external code.
+✅ Read-Only		|	You can expose only get or only set if needed.
+   or Write-Only Access
+
+2. Use setter and getter methods
+     Sets the current thread's copy of this thread-local variable
+
+      public void setDriver(RemoteWebDriver driver) {
+	rd.set(driver);
+
+}
+ Returns the value in the current thread's copy of this thread-local variable   
+public RemoteWebDriver getDriver() {
+	return rd.get();
+}
+
+@BeforeMethod
+public void precondition(){
+  setDriver();
+  then replace driver variable into getDriver()
+  getDriver().manage.window.maximize();
+}
+
+
+
+###########################################
+
+
+POM with Excel Integration:
+---------------------------
+Create data folder and have the excelsheets inside Login 
+Create a package called utils and have the DataLibrary java class inside
+Create getTestData() and annotate with DataProvider and call the readDataFromExcel() from DataLibrary class and return
+Replace all the hardcoded data with input arguments in the required pages
+In the testCases package, use dataProvider attribute to receive the data and pass input arguments in the test method.
+Create enterFilePath() in each testclass to mention the fileName and annotate with @BeforeClass or according to testng.xml structure
+
+How to Parameterize the data?
+	  1)Create a new package(utils) and copy the DataLibrary class from the previous project or package ✅
+	  and paste it here
+	  2)Create a data folder  ✅
+	  3)Declare the fileName globally in baseclass ✅
+	  4)Create a method for @DataProvider and call the DataLibrary class ✅
+	  5)Integrate @Test with dataProvider attribute ✅ 
+	  6)Pass the inputs as arguments in the testcase method level and replace the hardcoded values ✅
+	  7)In the testcase create a method to mention the ExcelFileName and annotate with @BeforeClass ✅
+
+
+
+###########################################
+

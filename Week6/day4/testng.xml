@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="functional suite" thread-count="2" verbose="2" parallel="tests">
+<parameter name="url" value="http://leaftaps.com/opentaps/control/login"></parameter>
+
+<test name="functional testcases" parallel="classes">
+<parameter name="browserName" value="safari"></parameter>
+<parameter name="profile" value="--guest"></parameter>
+<classes>
+<class name="com.leaftaps.testcases.TC001_LoginTest"/>
+<class name="com.leaftaps.testcases.TC002_CreateLead"/>
+</classes>
+</test>
+
+<test name="BDD Execution" parallel="classes">
+<parameter name="browserName" value="firefox"></parameter>
+<parameter name="profile" value="--private"></parameter>
+<classes>
+<class name="com.leaftaps.runner.BDDrunner"/>
+</classes>
+</test>
+</suite>
