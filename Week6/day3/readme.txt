@@ -217,7 +217,7 @@ FINAL STRUCTURE SHOULD LOOK LIKE
 
 Project
 │
-├── src/main/java
+├── src/test/java
 │   ├── com.leaftaps.base
 │   ├── com.leaftaps.features
 │   ├── com.leaftaps.pages
