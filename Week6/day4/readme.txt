@@ -1,7 +1,7 @@
-Title: README – POM + Cucumber + TestNG + Excel Framework Setup
+Title: POM + Cucumber + TestNG + Excel Framework Setup
 
 Objective
-Provide step-by-step instructions to set up and execute the Selenium automation framework using Page Object Model, Cucumber, TestNG, and Excel data-driven approach.
+step-by-step instructions to set up and execute the Selenium automation framework using Page Object Model, Cucumber, TestNG, and Excel data-driven approach.
 
 Prerequisites
 
