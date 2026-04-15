@@ -1,0 +1,508 @@
+########################################################################
+
+Steps to Generate Extent Report
+
+Step 1: Set Physical Report Path
+Example Path: Right-click the project → New → Folder → Name it as "reports".
+Step 2: Create ExtentReports Object
+Step 3: Attach Reporter to ExtentReports
+Step 4: Create a Test & Assign Details --> tc name , tc description, author name, category
+Step 5: Add Test Logs (Pass/Fail Status)[screenshot]
+Step 6: Flush the Report (Mandatory)
+
+
+
+----------------------------------------------------------
+Steps to integrate ExtentReport:
+
+1)Create startReport() in the BaseClass and declare the ExtentReport extent as a global variable
+Add all the common lines of code (Step 1 - Step 3)
+                                    Annotate startReport() with @BeforeSuite
+2)Create endResult() in the BaseClass and have the code
+extent.flush(); 
+                                    Annotate stopReport() with @AfterSuite
+3)Create startTestCase() in the Base and have the lines of code to create testcase and assign the details
+                                    Annotate testCaseDetails() method with @BeforeClass
+4)Replace all the hardcoded datas with some global variables
+Declare some global variables as public String testName, testDescription,testAuthor, testCategory;
+5)Create setValues() method inside the class file of testcases packages
+Assign all the value inside setValues() in each testcase with 	@BeforeTest
+                                     Annotate setValues() with @BeforeTest
+6)reportStep()
+
+
+
+@BeforeSuite---startReport()
+  @BeforeTest--->setValues()
+    @BeforeClass---startTestCase()
+     @DataProvider--->sendData()
+      @BeforeMethod--->precondn()
+       @test---->testcases
+      @AfterMethod--->postcondn()
+    @AfterClass---Nil
+  @AfterTest---Nil
+@AfterSuite----endResult()
+
+
+
+
+
+
+########################################################################
+
+    
+Type of framework : Hybrid  Framework(BDD + Data driven + page object model + ExtentReport)
+
+
+How to setup the framework:
+---------------------------
+
+1. Download ZIP file
+2. Extract the zip the file in your system
+3. Click on File -> open folder... in vscode
+4. Browse the extracted folder -> Select folder
+
+
+
+url : http://leaftaps.com/opentaps/control/main
+salesforce : https://login.salesforce.com/
+
+
+
+
+
+Framework(Makaia)
+
+-----------------
+    packages --> Design,base, pages, testcases, utils
+        Design --> All interface class are designed here
+        base --> Base class (Common test step for all the testcase)
+        pages --> design each webpages and elements actions
+        testcases --> testcase flow
+        utils --> readexcel,Reporter
+
+
+
+
+
+How to Explain the Framework
+----------------------------
+
+    part-1 (High level overview of what kind of tools and library)
+    --------------------------------------------------------------
+        Hybird framework
+        design pattern - POM
+        Project Management - Maven
+        Selenium - To interact with Browser based application
+        TestNG - To Control the execution flow
+        Cucumber - For BDD Execution
+        Apache Poi - To interact to microsoft application like (word, excel ,..)
+        Apache commons-io - To handle files
+        Extent report - to generate the custom dashboard in html
+        
+
+    part-2 (Components)
+    -------------------
+
+	1) DiverInstance - where the implementation of driver and wait by ThreadLocal for Thread safety and also provided setter and getter to 	access in secure way.
+
+    	2) Reporter(Abstract class)- Report related test steps are written to start report, start testcase, to attch snapshot and generate report 	in custom dashBoard as html format
+
+    	3) SeleniumBase(Class) - This is heart of the framework, Wrapper class, For the major implements are written here which actions related to 	Browser, WebElement.
+    
+
+	4) Browser(Interface) - Declare the functionalities/actions of browser like start the browser, locateElement, getTitle, close,     	quit,....frame, window, alert, ............
+
+
+    	5) Element(Interface) - Declare the functionalities/actions of WebElement to pass input, click, getText, verify, dropdown,.....
+
+    	6) Locators(Enum) - which help to choose the locators type quickly and also to avoid the type error and case mismatches
+
+            this class demonstrates how to use an enum to create a set of predefined constants for different types of element locators, and then 	use that enum in a method to dynamically choose the correct locator strategy.
+	
+
+	SeleniumBase(Class) - This is heart of the framework, Wrapper class, For the major implements are written here which actions related to Browser, WebElement.
+    
+    
+"The reason we call the class a wrapper is that the methods defined in the Selenium base class (Selenium functionalities/actions) are combined with custom implementations of reporting and exception handling to create wrapper methods."
+Explanation:
+Wrapper Class:
+A "wrapper" class encapsulates or "wraps" existing functionality (like Selenium WebDriver methods) to extend, enhance, or simplify its usage.
+
+Example:
+Instead of directly using driver.findElement() in your code, you create a wrapper method like clickElement(By locator) that internally uses Selenium’s findElement() but adds extra logic (e.g., logging, error handling).
+
+Selenium Base Methods:
+These are raw Selenium WebDriver actions (e.g., click(), sendKeys(), findElement()). They work but lack features like logging or error recovery.
+
+Added Custom Logic:
+
+Reporter: Logs steps (e.g., "Clicked login button") into test reports for debugging.
+
+Exception Handling: Catches errors (e.g., NoSuchElementException) and adds recovery logic (retries, screenshots, meaningful error messages).
+
+Result:
+
+Wrapper Methods:
+Combine raw Selenium actions + reporting + exception handling.
+Example:
+
+public void safeClick(By locator) {
+    try {
+        reporter.log("Clicking element: " + locator);
+        driver.findElement(locator).click();
+    } catch (Exception e) {
+        reporter.logError("Click failed: " + e.getMessage());
+    }
+}
+
+
+    
+    
+    	7) ProjecSpecificMethod(Class) -  Common test steps for all the testcases (DataProvider, preCon.., postCon...)
+    
+    	8) Pages - each webpage is designed 
+    
+    	9) testcase - testcase flow is deisgned.
+
+
+
+
+    part-3(Execution flow )
+    -----------------------
+    @BeforeSuite --> startReport() in Reporter class
+        @BeforeTest --> setValues() in testcase class
+            @BeforeClass --> setUpClass() in AbstarctTestNGCucumberTests and startTestCase() in Reporter
+                @DataProvider --> fetchData() in PSM class
+                    @BeforeMethod --> preCondition() in PSM class
+                        @Test --> testcase class
+                    @AfterMethod --> postCondition() in PSM class
+                @AfterClass --> tearDownClass() in AbstractTestNGCucumberTests
+            @AfterTest --> NA
+        @AferSuite--> endResult() in Reporter
+
+
+
+
+click() method :
+
+1. Check if the Element is Visible
+
+try {
+    ele.isDisplayed(); // @FindBy returns a proxy even if it does not exist
+} catch (NoSuchElementException e) {
+    reportStep("The Element " + ele + " is not found", "fail");
+}
+
+What It Does:
+Before attempting to click, the code checks if the element is displayed. This is important because sometimes the element exists as a placeholder even if it isn’t truly visible.
+
+
+2.Attempt to Click the Element
+
+text = ele.getText();
+if (ele.isEnabled()) {
+    ele.click();
+} else {
+    getDriver().executeScript("arguments[0].click()", ele);
+}
+
+What It Does:
+The method tries to click the element using two different methods depending on the element's state.
+
+
+3.Retry Clicking if the First Attempt Fails
+
+boolean bFound = false;
+int totalTime = 0;
+while (!bFound && totalTime < 10000) {
+    try {
+        Thread.sleep(500);
+        ele.click();
+        bFound = true;
+    } catch (Exception e1) {
+        bFound = false;
+    }
+    totalTime = totalTime + 500;
+}
+if (!bFound)
+    ele.click();
+
+What It Does:
+If an exception occurs during the first click attempt, the code enters a loop to retry clicking the element every half second for up to 10 seconds.
+
+what bFound does here ?
+
+A) Initialization:
+
+bFound is set to false to start, meaning the click hasn't succeeded yet.
+totalTime starts at 0 milliseconds.
+
+B) Retry Loop:
+
+The loop runs as long as the click hasn’t been successful (!bFound) and the total elapsed time is less than 10,000 milliseconds (10 seconds).
+
+    Inside the Loop:
+
+            The code pauses for 500 milliseconds using Thread.sleep(500).
+
+            It then attempts to click the element with ele.click().
+
+            If the click is successful, no exception is thrown, and bFound is set to true, which causes the loop to end.
+
+            If an exception occurs during the click, it is caught, and bFound remains false, allowing the loop to continue.
+
+            After each attempt, totalTime increases by 500 milliseconds.
+
+C) Final Attempt:
+
+Once the loop ends (either due to a successful click or after 10 seconds), there's a  check:
+
+        If bFound is still false (meaning no successful click occurred during the retries), it makes one final call to ele.click() outside the loop.
+
+
+4. Handle Specific Exceptions
+
+What It Does:
+
+The method includes different catch blocks to handle and report various types of errors that might occur during the clicking process.
+
+
+
+
+######################################################################
+3) what are the Automation challenges:
+
+1) dynamically entering data
+
+
+ 
+ <dependency>
+<groupId>com.github.javafaker</groupId>
+<artifactId>javafaker</artifactId>
+<version>1.0.2</version>
+</dependency>
+
+
+
+
+
+
+
+2) dynamic Elements : STAR Approch
+
+
+even the elements tagname is dynamically changing at runtime 
+
+update 1: input tag
+update 2: span tag
+
+//*[@id="username"]
+
+//*[@id="uname"]
+
+
+which attributes values is dynamically changing means which approch you will follow ?
+  
+
+axes path - relationship based advanced xpath
+
+RelativeLocator : 
+
+Relative Locators in Selenium are a feature introduced to help find elements based on their spatial relationship to other elements on the page. This feature simplifies locating web elements in dynamic layouts where traditional locators like ID, class, or XPath might be challenging.
+New locators introduced to find elements relative to others, such as:
+
+            above()
+                below()
+                    toLeftOf()
+                        toRightOf()
+                               near()
+
+These locators make locating elements more intuitive.
+
+
+syntax: 
+driver.findElement(RelativeLocator.with(By.Locator("attributevalue")).above(WebElement referenceElement));
+
+Advantages of Relative Locators:
+
+Easier to identify elements in dynamic or changing layouts.
+Reduces dependency on absolute paths like XPath.
+Improves code readability and maintainability.
+
+Limitations:
+
+The accuracy of locating elements depends on the structure of the page.
+Performance might be slower compared to direct locators if used excessively.
+
+
+3) upload file :
+https://www.file.io/
+
+<input id="select-files-input" type="file" multiple="" class="css-3fyy40">
+
+type="file" ----> Then we can upload the file using selenium sendKeys();
+
+driver.findElement(By.id("select-files-input")).sendKeys("GIVE THE FILE PATH")
+
+
+
+4) shadow DOM
+ 
+SUKGU -- OBJECT FOR THE Shadow 
+
+
+
+<dependency>
+    <groupId>io.github.sukgu</groupId>
+    <artifactId>automation</artifactId>
+    <version>0.1.4.1</version>
+</dependency>
+
+
+
+5)Window and Tab Management
+
+
+
+
+Added methods for managing multiple windows and tabs, such as:
+driver.switchTo().newWindow(WindowType.TAB)
+driver.switchTo().newWindow(WindowType.WINDOW)
+
+
+
+Key Differences Between TAB and WINDOW
+
+Feature				WindowType.TAB		|	WindowType.WINDOW
+
+Scope			Opens a new tab in the same window	| Opens a completely new window
+Use case		Navigating to related content		| Opening independent content
+Window Handles			Same session			    | Separate session
+Browser Behavior	Part of the same browser instance|  Opens a new instance
+
+6) JavaScript Errors
+
+executeScript
+
+
+JavascriptExecutor
+
+
+
+In Selenium, the JavascriptExecutor interface is used to execute JavaScript code in the context of the browser. Here are the various ways to initialize and use JavascriptExecutor in Selenium Java:
+
+1)Using Explicit Casting
+The most common way to initialize JavascriptExecutor is by explicitly casting the WebDriver instance:
+
+
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+2.Direct Use Without a Separate Variable
+You can directly cast and use the JavascriptExecutor without assigning it to a variable
+
+    ((JavascriptExecutor) driver).executeScript(String script, Object... args);
+
+        The executeScript() method in Selenium Java allows you to execute custom JavaScript code directly in the browser during test automation(it will directly make the API CALL). This provides flexibility to perform operations that might not be possible using standard Selenium WebDriver APIs. Below are various use cases for executeScript():
+
+
+1. Interacting with Hidden or Disabled Elements
+
+    Sometimes, elements are not visible or disabled in the DOM but need to be interacted with for testing purposes.
+
+    .executeScript("arguments[0].click();", element);
+
+2. Scrolling the Page
+
+    Scroll the page to a specific position or an element.
+
+        
+        .executeScript("arguments[0].scrollIntoView(true);", element);
+        .executeScript("window.scrollBy(0,1000);");
+            window.scrollBy(x, y) is a JavaScript function that scrolls the document by a given number of pixels relative to the current position:
+
+            x: The number of pixels to scroll horizontally (positive values scroll to the right, negative values to the left).
+            y: The number of pixels to scroll vertically (positive values scroll down, negative values scroll up).
+            In your example:
+
+            x = 0: No horizontal scrolling.
+            y = 1000: Scrolls vertically down by 1000 pixels.
+
+
+3. Retrieving the Page Title or Other Properties
+
+    Get the page title or other JavaScript-accessible properties.
+    String title = (String) ((JavascriptExecutor) driver).executeScript("return document.title;");
+    
+    System.out.println("Page Title: " + title);
+
+4. Handling Alerts
+    Triggering or managing browser alerts.
+
+    ((JavascriptExecutor) driver).executeScript("alert('This is a test alert');");
+
+5. Force Page Refresh or Navigation
+    
+    Force reload or navigate without using WebDriver.
+    ((JavascriptExecutor) driver).executeScript("location.reload();");
+
+6. Manipulating Element Attributes
+    
+    
+    Modify attributes of a DOM element.
+    If sendKeys() is not working means we can go with it 
+
+    ((JavascriptExecutor) driver).executeScript("arguments[0].setAttribute('value', 'New Value');", element);
+
+
+7. Capturing Screenshots
+    
+    Capture a screenshot of a specific element using JavaScript.
+
+
+
+    String base64Image = (String) ((JavascriptExecutor) driver).executeScript(
+    "var canvas = document.createElement('canvas');" +
+    "canvas.width = arguments[0].offsetWidth;" +
+    "canvas.height = arguments[0].offsetHeight;" +
+    "var ctx = canvas.getContext('2d');" +
+    "ctx.drawImage(arguments[0], 0, 0);" +
+    "return canvas.toDataURL('image/png').substring(22);", element
+);
+
+       What Happens in the Browser?
+        A <canvas> is created dynamically in memory (it is not visible on the page).
+            The specified element (element) is rendered onto the canvas as an image.
+                The canvas content is converted into a Base64-encoded string in PNG format.
+                    The encoded string is returned to the Java code.
+    
+    
+Decode the Base64 String
+converting the base64Image(string-codeImage)  into the decodeImage 
+    Use Java's Base64 utility to decode the string into a byte array 
+
+    
+        byte[] decodedImage = java.util.Base64.getDecoder().decode(base64Image);
+
+Save the Byte Array as an Image
+
+we have to Write the byte array to a file using FileOutputStream or Files.write()
+        try {
+	        java.nio.file.Path destination = java.nio.file.Paths.get("logo.png");
+	        java.nio.file.Files.write(destination, decodedImage);
+	        System.out.println("Screenshot saved at: " + destination.toAbsolutePath());
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    
+Access the Saved Image
+
+        The image will now be available in the specified file path( logo.png in the current working directory).
+
+Limitations
+
+1.Cross-Origin Restrictions: If the element contains images from a different domain, browser security may prevent the drawImage function from rendering them.
+2.Element Visibility: The element must be fully visible on the page; otherwise, the image may be incomplete.
+3.Not Pixel-Perfect: The rendered image might not always match the browser's exact rendering due to limitations of the <canvas> API.
+
+---------------------------------------------------------
